@@ -6,7 +6,6 @@ mod database_functions;
 mod tauri_commands;
 
 use dotenvy::dotenv;
-use sqlx::mysql::MySqlPoolOptions;
 
 use std::env;
 
