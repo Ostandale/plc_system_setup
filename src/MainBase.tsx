@@ -8,7 +8,7 @@ function MainBase() {
         <div >
             <div className='base'>
                 {plcs.map((value, key) => {
-                    return <PlcComponent props={value} key={key} />
+                    return (<PlcComponent props={value} key={key} />)
                 })}
             </div>
 
