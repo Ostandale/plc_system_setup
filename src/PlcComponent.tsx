@@ -1,21 +1,23 @@
-import React from 'react';
+
 import './PlcComponent.css';
+import SettingScreen from './SettingScreen';
 
-function PlcComponent(get_props: any) {
+function PlcComponent({ props }: any, key: any) {
+    console.log(props)
     return (
-
-        <button className='button'>
-            {get_props.name}
+        <div className='plcComponent' onClick={() => btnOn(props)}>
+            {props}
+            <div className='ipadd'>192.168.10.100</div>
             <div className='line'></div>
-            <button onClick={btnOn}>設定</button>
-            <div>設定２</div>
-
-        </button>
-
+            <div>command read</div>
+            <div>command write</div>
+            <div>data read</div>
+        </div>
     )
 }
 
-function btnOn() {
-    console.log("aaa");
+function btnOn(value: number) {
+    console.log(value);
+    return (< SettingScreen props={value} />)
 }
 export default PlcComponent;
