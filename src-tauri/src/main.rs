@@ -29,7 +29,10 @@ async fn main() {
 
     //  !
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![tauri_commands::test1_func,])
+        .invoke_handler(tauri::generate_handler![
+            tauri_commands::test1_func,
+            tauri_commands::read_status,
+        ])
         .manage(state_value)
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
