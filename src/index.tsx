@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import MainBase from './MainBase';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { invoke } from '@tauri-apps/api';
 
-
-let plcStatus = [];
-
+let plcStatus: any = [];
 
 interface PlcStatus {
   num: number,
@@ -20,29 +19,20 @@ interface PlcStatus {
   command_data_read: string,
 }
 
-for (var i = 0; i < 8; i++) {
-  let plcStatus2: PlcStatus = {
-    num: i,
-    machine_id: "aaa",
-    ip_address: "bbb",
-    plc_use: true,
-    plc_working: true,
-    plc_stop: false,
-    command_read: "com r",
-    command_write: "com w",
-    command_data_read: "com data r",
-  };
-  plcStatus[i] = plcStatus2;
-}
-
 console.log(plcStatus);
+invoke('read_status').then((res: any) => {
+  for (var i in res) {
+    plcStatus[i] = i;
+  }
+})
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <MainBase />
+    <App />
   </React.StrictMode>
 );
 

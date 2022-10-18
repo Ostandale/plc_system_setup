@@ -66,11 +66,3 @@ export default function PlcComponent({ props }: any, key: any) {
     )
 }
 
-function BtnOn(value: number) {
-
-    console.log(value);
-
-    < TestModalOpen />
-
-    console.log("end")
-}

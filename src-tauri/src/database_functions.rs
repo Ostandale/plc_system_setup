@@ -1,10 +1,13 @@
 use dotenvy::dotenv;
+use serde::{Deserialize, Serialize};
 use sqlx::mysql::MySqlPoolOptions;
 use sqlx::{MySql, Pool};
 use std::env;
+
 //  *   データベース用の構造体
+#[derive(Debug, Clone, Serialize)]
 pub struct DabaseForSystemStatus {
-    pub num: i16,
+    pub num: u16,
     pub machine_id: String,
     pub ip_address: String,
     pub plc_use: bool,
