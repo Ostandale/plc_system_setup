@@ -50,7 +50,6 @@ pub async fn read_status(
                 };
                 res_list.push(read_status);
             }
-
             Ok(res_list)
         }
         Err(_) => Err("ng".to_string()),

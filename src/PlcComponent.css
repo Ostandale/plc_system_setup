@@ -1,6 +1,6 @@
-.plcComponent {
+.cssPlcGreen {
     margin: 10px;
-    width: 150px;
+    width: 200px;
     padding: 10px;
 
     border: 4px solid limegreen;
@@ -9,14 +9,37 @@
     color: bisque;
 }
 
-.line {
+.cssPlcRed {
+    margin: 10px;
+    width: 200px;
+    padding: 10px;
+
+    border: 4px solid red;
+    border-radius: 10px;
+    background-color: #400000;
+    color: bisque;
+}
+
+.cssLineGreen {
     border-bottom: 4px solid lightgreen;
     border-radius: 10px;
     margin: 5px;
 }
 
-.ipadd {
+.cssLineRed {
+    border-bottom: 4px solid red;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.cssIpAddGreen {
     background-color: darkcyan;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.cssIpAddRed {
+    background-color: darkmagenta;
     border-radius: 5px;
     padding: 2px;
 }

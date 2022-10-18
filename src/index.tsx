@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { invoke } from '@tauri-apps/api';
 
-let plcStatus: any = [];
-
-interface PlcStatus {
+export interface PlcStatus {
   num: number,
   machine_id: string,
   ip_address: string,
@@ -18,14 +15,6 @@ interface PlcStatus {
   command_write: string,
   command_data_read: string,
 }
-
-console.log(plcStatus);
-invoke('read_status').then((res: any) => {
-  for (var i in res) {
-    plcStatus[i] = i;
-  }
-})
-
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
