@@ -46,7 +46,7 @@ pub async fn read_status(
                     plc_stop: i.get(5),
                     command_read: i.get(6),
                     command_write: i.get(7),
-                    command_d_read: i.get(8),
+                    command_data_read: i.get(8),
                 };
                 res_list.push(read_status);
             }

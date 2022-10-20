@@ -1,40 +1,58 @@
-import React, { useContext, useState, useEffect } from 'react';
 import './App.css';
 import PlcComponent from './PlcComponent';
-import { CssBaseline, Paper, Container } from "@mui/material";
+import { useState } from 'react';
+import { Paper, Container } from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './ThemeColor';
 import { invoke } from '@tauri-apps/api';
-import { PlcStatus } from './index';
-
-export let plcStatus: any = [];
-export const PlcStatusContext = React.createContext(plcStatus);
-
 
 //  todo  -----------------------------------------------------------------------------
-function App() {
-  invoke('read_status').then((res: any) => {
-    plcStatus: PlsStatus = {
-      num: res.get(0),
-    };
-  });
-  console.log("data", plcStatus);
-  //  todo  ---------------------------------------------------------------------------------
 
+export let plcStatus: any = [];
+
+//  スリープ用　あまり良くない処理
+const sleepSync = (ms: number) => {
+  const end = new Date().getTime() + ms;
+  while (new Date().getTime() < end) { /* do nothing */ }
+}
+
+//  設定をデータベースから読み込む
+invoke('read_status').then((res: any) => {
+  console.log("App")
+  plcStatus = res;
+});
+//  １００ｍｓ待つ　データベースの処理待ち　他にやり方を探したい
+sleepSync(100);
+console.log("plcstatus", plcStatus)
+
+function App() {
+  console.log("App2");
+  const [getPlcStatus, setPlcStatus] = useState(plcStatus);
+
+  //  todo  リフトアップ用
+
+  function handleSettingChange(newPlcStatus: any) {
+    setPlcStatus(newPlcStatus);
+    console.log("plcstatus 変更")
+  }
+
+  //  todo
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <Container >
-
         <Paper className='App-base'>
-          {plcStatus.map((value: any, key: any) => {
-            return (<PlcComponent props={value} key={key} />)
-          })}
-        </Paper>
 
+          {
+            plcStatus.map((value: any, key: any) => {
+              return (
+                < PlcComponent props={value} key={key} handleSettingChange={(e: any) => handleSettingChange(e)} />
+              )
+            })
+          }
+
+        </Paper>
       </Container>
     </ThemeProvider>
   )
-
 }
 export default App;

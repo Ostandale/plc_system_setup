@@ -1,26 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { CssBaseline } from '@mui/material';
 
-export interface PlcStatus {
-  num: number,
-  machine_id: string,
-  ip_address: string,
-  plc_use: boolean,
-  plc_working: boolean,
-  plc_stop: boolean,
-  command_read: string,
-  command_write: string,
-  command_data_read: string,
-}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
+    <CssBaseline />
     <App />
   </React.StrictMode>
 );

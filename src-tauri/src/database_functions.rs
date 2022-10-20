@@ -15,7 +15,7 @@ pub struct DabaseForSystemStatus {
     pub plc_stop: bool,
     pub command_read: String,
     pub command_write: String,
-    pub command_d_read: String,
+    pub command_data_read: String,
 }
 
 //  *   データベースとの接続チェック

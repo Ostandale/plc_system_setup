@@ -6,7 +6,10 @@
 @media (prefers-reduced-motion: no-preference) {}
 
 .App-base {
-  margin: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: -20px;
+  margin-right: -20px;
   padding: 10px;
   display: flex;
   flex-direction: row;
