@@ -66,7 +66,28 @@ pub async fn update_plc_data(
 
     let mut db_pool = state.db_pool.clone().unwrap();
     match sqlx::query(&sql_query).fetch_all(&db_pool).await {
-        Ok(v) => Ok(()),
+        Ok(v) => {
+            //  *   machine_idに応じた新規データベースをセットアップする
+            let sql_query = format!(
+                "CREATE TABLE if not exists `{machine_id}_log` (
+                `epoch_time` bigint NOT NULL,
+                `machine_id` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
+                `product_name` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
+                `lot_num` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
+                `measured_value` int unsigned NOT NULL,
+                `decision` int NOT NULL,
+                `date_year` int NOT NULL,
+                `date_month` int NOT NULL,
+                `date_day` int NOT NULL,
+                PRIMARY KEY (`epoch_time`)
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+                machine_id = props.machine_id
+            );
+            match sqlx::query(&sql_query).fetch_all(&db_pool).await {
+                Ok(v) => Ok(()),
+                Err(e) => Err(()),
+            }
+        }
         Err(e) => Err(()),
     }
 }
