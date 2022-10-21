@@ -13,6 +13,7 @@ use std::env;
 #[tokio::main]
 async fn main() {
     dotenv().ok();
+<<<<<<< HEAD
     let db_url =
         &env::var("DATABASE_URL").expect(".envファイルの位置、DATABASE_URLの内容を見直して下さい");
 
@@ -28,6 +29,9 @@ async fn main() {
     };
 
     //  !
+=======
+    //  test
+>>>>>>> 1d24afe0bdba984be1d6564bf40235647e808f4d
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             tauri_commands::test1_func,
