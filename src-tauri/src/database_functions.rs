@@ -18,6 +18,17 @@ pub struct DabaseForSystemStatus {
     pub command_data_read: String,
 }
 
+#[derive(Debug, Clone, Deserialize)]
+pub struct ReciveDataFromFront {
+    pub num: u16,
+    pub machine_id: String,
+    pub ip_address: String,
+    pub plc_use: bool,
+    pub command_read: String,
+    pub command_write: String,
+    pub command_data_read: String,
+}
+
 //  *   データベースとの接続チェック
 pub async fn get_db_pool(db_url: &String) -> Option<Pool<MySql>> {
     match MySqlPoolOptions::new()

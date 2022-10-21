@@ -32,6 +32,7 @@ async fn main() {
         .invoke_handler(tauri::generate_handler![
             tauri_commands::test1_func,
             tauri_commands::read_status,
+            tauri_commands::update_plc_data,
         ])
         .manage(state_value)
         .run(tauri::generate_context!())

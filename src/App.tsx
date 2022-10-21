@@ -16,24 +16,23 @@ const sleepSync = (ms: number) => {
   while (new Date().getTime() < end) { /* do nothing */ }
 }
 
+//  todo  invokeの処理待ちを改善したい
 //  設定をデータベースから読み込む
 invoke('read_status').then((res: any) => {
-  console.log("App")
   plcStatus = res;
 });
 //  １００ｍｓ待つ　データベースの処理待ち　他にやり方を探したい
 sleepSync(100);
-console.log("plcstatus", plcStatus)
+//  todo
 
+
+//  ! App
 function App() {
-  console.log("App2");
   const [getPlcStatus, setPlcStatus] = useState(plcStatus);
 
   //  todo  リフトアップ用
-
   function handleSettingChange(newPlcStatus: any) {
     setPlcStatus(newPlcStatus);
-    console.log("plcstatus 変更")
   }
 
   //  todo
@@ -45,7 +44,7 @@ function App() {
           {
             plcStatus.map((value: any, key: any) => {
               return (
-                < PlcComponent props={value} key={key} handleSettingChange={(e: any) => handleSettingChange(e)} />
+                < PlcComponent propsValue={value} key={key} handleSettingChange={(e: any) => handleSettingChange(e)} />
               )
             })
           }

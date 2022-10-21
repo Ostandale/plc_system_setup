@@ -55,3 +55,18 @@ pub async fn read_status(
         Err(_) => Err("ng".to_string()),
     }
 }
+
+//  !   PLCの設定を書き込む
+#[tauri::command]
+pub async fn update_plc_data(
+    state: State<'_, StateValue>,
+    props: database_functions::ReciveDataFromFront,
+) -> Result<(), ()> {
+    let sql_query = format!("update plc_status set machine_id=\"{machine_id}\", ip_address=\"{ip_address}\", plc_use={plc_use}, command_read=\"{cr}\", command_write=\"{cw}\", command_data_read=\"{cdr}\" where num={num}",num = props.num, machine_id = props.machine_id, ip_address = props.ip_address, plc_use = props.plc_use, cr =props.command_read, cw = props.command_write, cdr=props.command_data_read);
+
+    let mut db_pool = state.db_pool.clone().unwrap();
+    match sqlx::query(&sql_query).fetch_all(&db_pool).await {
+        Ok(v) => Ok(()),
+        Err(e) => Err(()),
+    }
+}
