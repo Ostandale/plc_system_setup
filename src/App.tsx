@@ -18,9 +18,18 @@ const sleepSync = (ms: number) => {
 
 //  todo  invokeの処理待ちを改善したい
 //  設定をデータベースから読み込む
-invoke('read_status').then((res: any) => {
-  plcStatus = res;
-});
+invoke('read_status')
+  .then((res: any) => {
+    plcStatus = res;
+  })
+  .catch(() => {
+    invoke("make_db_plc_status").then(() => {
+      console.log("新規DB作成");
+      invoke('read_status').then((res: any) => {
+        plcStatus = res;
+      })
+    }).catch((e) => console.log("DB作成失敗", e))
+  });
 //  １００ｍｓ待つ　データベースの処理待ち　他にやり方を探したい
 sleepSync(100);
 //  todo

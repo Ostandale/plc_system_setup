@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import './PlcComponent.css';
 import TestModalOpen from './TestModals';
-import { Button, Container, Box, Input, TextField, FormGroup, FormControlLabel, Checkbox, Paper } from "@mui/material";
+import { Button, Container, Box, Input, TextField, FormGroup, FormControlLabel, Checkbox, Paper, Radio, RadioGroup } from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
 import Modal from "react-modal";
 import { theme } from './ThemeColor';
@@ -58,6 +58,7 @@ export default function PlcComponent({ propsValue, ...props }: any, { key }: any
         const newPlcStatus = { ...plcStatus };
         //  todo    リフトアップしてステート書換　もしかしてデータベースを書き換えることで必要ない？
         props.handleSettingChange(newPlcStatus);
+        console.log("plc maker =", plcStatus[1])
 
         //  todo    データベースに変更を加える  invoke発行
         invoke('update_plc_data', { props: plcStatus[propsValue.num] }).then(res => { }).catch(err => { console.log("database writing error") })
@@ -105,7 +106,19 @@ export default function PlcComponent({ propsValue, ...props }: any, { key }: any
                                 <FormControlLabel control={<Checkbox name="plc_use" id="plc_use" checked={values.plc_use} onChange={handleChange} />} label="plc_use" />
 
                             </div>
-
+                            <div>
+                                <RadioGroup
+                                    aria-labelledby="radio-buttons-group-label"
+                                    name="plc_maker"
+                                    row
+                                    onChange={handleChange}
+                                    value={values.plc_maker}
+                                >
+                                    <FormControlLabel value="Mitsubishi" control={<Radio />} label="Mitsubishi" />
+                                    <FormControlLabel value="Omron" control={<Radio />} label="Omron" />
+                                    <FormControlLabel value="Other" control={<Radio />} label="Other" />
+                                </RadioGroup>
+                            </div>
 
                             <div><TextField fullWidth id="command_read" label="command_read" variant="standard" name="command_read" value={values.command_read} onChange={handleChange} /></div>
                             <div><TextField fullWidth id="command_write" label="command_write" variant="standard" name="command_write" value={values.command_write} onChange={handleChange} /></div>

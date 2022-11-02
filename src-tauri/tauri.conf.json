@@ -29,7 +29,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "data-setting",
+      "identifier": "plc-status-setup",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
