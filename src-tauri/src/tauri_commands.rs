@@ -119,7 +119,7 @@ pub async fn update_plc_data(
                 `lot_num` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
                 `measured_value` int unsigned NOT NULL,
                 `decision` int NOT NULL,
-                `registance_value` int unsigned NOT NULL,
+                `resistance_value` int unsigned NOT NULL,
                 `allowable_difference` int unsigned NOT NULL,
                 `date_year` int NOT NULL,
                 `date_month` int NOT NULL,
