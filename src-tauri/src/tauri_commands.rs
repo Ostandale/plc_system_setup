@@ -51,7 +51,7 @@ pub async fn make_db_plc_status(state: State<'_, StateValue>) -> Result<String, 
         Ok(_) => {
             for index in 0..=8 {
                 let read_command = "500000FFFF03000C000200010401008A0200900100";
-                let write_command = "500000FFFF03000D000200011401008A020090010010";
+                let write_command = "500000FFFF03000D000200011401008A020090010000";
                 let read_data_command = "500000FFFF03000C00000001040000140500A82800";
 
                 let sql_query = format!("INSERT INTO `plc_status` (`num`, `machine_id`, `ip_address`, `plc_maker`, `plc_use`, `plc_working`, `plc_stop`, `command_read`, `command_write`, `command_data_read`) VALUES ('{}', 'PLC_NAME', '192.168.100.100:8000', 'Mitsubishi', '0', '0', '0', '{}', '{}', '{}')",index,read_command, write_command, read_data_command);
